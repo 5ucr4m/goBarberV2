@@ -8,10 +8,9 @@ const appointmentController = new AppointmentController();
 
 appointmentsRouter.use(AuthMiddleware);
 
-// appointmentsRouter.get('/', async (request, response) => {
-//     const appointments = await appointmentsRepository.find();
-//     return response.json(appointments);
-// });
+appointmentsRouter.get('/', async (request, response) => {
+
+});
 
 appointmentsRouter.post('/', appointmentController.create);
 
