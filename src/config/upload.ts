@@ -5,7 +5,8 @@ import multer from 'multer';
 const uploadDir = path.resolve(__dirname, '..', '..', 'uploads');
 
 export default {
-    directory: uploadDir,
+    temp: uploadDir,
+    directory: path.resolve(uploadDir, 'Files'),
     storage: multer.diskStorage({
         destination: uploadDir,
         filename(request, file, callback) {
