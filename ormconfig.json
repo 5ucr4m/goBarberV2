@@ -1,13 +1,13 @@
 {
     "type": "postgres",
-    "host": "localhost",
+    "host": "drona.db.elephantsql.com",
     "port": 5432,
-    "username": "5ucr4m",
-    "password": "15031986",
-    "database": "gobarber",
-    "entities": ["./src/models/*.ts"],
-    "migrations": ["./src/database/migrations/*.ts"],
+    "username": "izgnxwcq",
+    "password": "VL8VEu_RZcxXvbvXDyQI3tulk9zL_kqv",
+    "database": "izgnxwcq",
+    "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
+    "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
     "cli": {
-        "migrationsDir": "./src/database/migrations"
+        "migrationsDir": "./src/shared/infra/typeorm/migrations"
     }
 }
