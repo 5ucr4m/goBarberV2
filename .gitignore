@@ -3,6 +3,8 @@ dist/
 build/
 tmp/
 temp/
+.env
+ormconfig.json
 
 uploads/*
 !upload/.gitkeep
