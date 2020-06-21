@@ -1,13 +1,24 @@
-{
-    "type": "postgres",
-    "host": "drona.db.elephantsql.com",
-    "port": 5432,
-    "username": "izgnxwcq",
-    "password": "VL8VEu_RZcxXvbvXDyQI3tulk9zL_kqv",
-    "database": "izgnxwcq",
-    "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
-    "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
-    "cli": {
-        "migrationsDir": "./src/shared/infra/typeorm/migrations"
+[
+    {
+        "type": "postgres",
+        "host": "drona.db.elephantsql.com",
+        "port": 5432,
+        "username": "izgnxwcq",
+        "password": "VL8VEu_RZcxXvbvXDyQI3tulk9zL_kqv",
+        "database": "izgnxwcq",
+        "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
+        "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
+        "cli": {
+            "migrationsDir": "./src/shared/infra/typeorm/migrations"
+        }
+    },
+    {
+        "name": "mongo",
+        "type": "mongodb",
+        "host": "localhost",
+        "port": "27017",
+        "database": "gobarber",
+        "useUnifiedTopology": true,
+        "entities": ["./src/modules/**/infra/typeorm/schemas/*.ts"]
     }
-}
+]
