@@ -3,7 +3,7 @@ import { Router } from 'express';
 import appointmentsRoutes from '@modules/appointments/infra/http/routes/appointments.routes';
 import providersRoutes from '@modules/appointments/infra/http/routes/providers.routes';
 import usersRoutes from '@modules/users/infra/http/routes/users.routes';
-import sessionRoutes from '@modules/users/infra/http/routes/sessios.routes';
+import sessionRoutes from '@modules/users/infra/http/routes/session.routes';
 import passwordsRoutes from '@modules/users/infra/http/routes/password.routes';
 import profileRoutes from '@modules/users/infra/http/routes/profile.routes';
 
