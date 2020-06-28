@@ -19,13 +19,12 @@ interface IResponse {
 
 @injectable()
 class AuthenticateUserService {
-    
     constructor(
         @inject('UserRepository')
         private userRepository: IUserRepository,
 
         @inject('HashProvider')
-        private hashProvider: IHashProvider
+        private hashProvider: IHashProvider,
     ) {}
 
     public async execute({ email, password }: IRequest): Promise<IResponse> {
@@ -35,7 +34,7 @@ class AuthenticateUserService {
             throw new AppError('Email or password invalid!', 401);
         }
 
-        if (! await this.hashProvider.compareHash(password, user.password)) {
+        if (!(await this.hashProvider.compareHash(password, user.password))) {
             throw new AppError('Email or password invalid!', 401);
         }
 
@@ -45,8 +44,6 @@ class AuthenticateUserService {
             subject: user.id,
             expiresIn,
         });
-
-        delete user.password;
 
         return {
             user,

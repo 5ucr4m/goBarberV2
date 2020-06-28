@@ -21,10 +21,16 @@ class UpdateProfileService {
         private userRepository: IUserRepository,
 
         @inject('HashProvider')
-        private hashProvider: IHashProvider
+        private hashProvider: IHashProvider,
     ) {}
 
-    public async execute({ user_id, name, email, old_password, password }: IRequest): Promise<User> {
+    public async execute({
+        user_id,
+        name,
+        email,
+        old_password,
+        password,
+    }: IRequest): Promise<User> {
         const user = await this.userRepository.findByID(user_id);
 
         if (!user) {
@@ -42,7 +48,10 @@ class UpdateProfileService {
                 throw new AppError('You need to provider old password!!');
             }
 
-            const samePassword = await this.hashProvider.compareHash(old_password, user.password);
+            const samePassword = await this.hashProvider.compareHash(
+                old_password,
+                user.password,
+            );
 
             if (!samePassword) {
                 throw new AppError('You old password are wrong!!');
@@ -50,12 +59,11 @@ class UpdateProfileService {
 
             user.password = await this.hashProvider.generateHash(password);
         }
-        
+
         user.name = name;
         user.email = email;
 
         return this.userRepository.save(user);
-
     }
 }
 
