@@ -4,6 +4,7 @@ import IFindAllProvidersDTO from '../dtos/IFindAllProvidersDTO';
 
 import AppError from '@shared/errors/AppError';
 import IUserRepository from '@modules/users/repositories/IUserRepository';
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 
 import User from '@modules/users/infra/typeorm/entities/Users';
 
@@ -16,10 +17,22 @@ class ListProvidersService {
     constructor(
         @inject('UserRepository')
         private userRepository: IUserRepository,
+
+        @inject('CacheProvider')
+        private cacheProvider: ICacheProvider,
     ) {}
 
     public async execute({ user_id }: IRequest): Promise<User[]> {
-        const users = await this.userRepository.findAllProviders({ except_user_id: user_id });
+        const cacheKey = `providers-list:${user_id}`;
+        let users = await this.cacheProvider.recover<User[]>(cacheKey);
+
+        if (!users) {
+            users = await this.userRepository.findAllProviders({
+                except_user_id: user_id,
+            });
+
+            await this.cacheProvider.save(cacheKey, users);
+        }
 
         if (!users) {
             throw new AppError('User not found!!');
