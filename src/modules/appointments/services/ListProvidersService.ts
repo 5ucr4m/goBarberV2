@@ -1,6 +1,5 @@
 import { injectable, inject } from 'tsyringe';
-
-import IFindAllProvidersDTO from '../dtos/IFindAllProvidersDTO';
+import { classToClass } from 'class-transformer';
 
 import AppError from '@shared/errors/AppError';
 import IUserRepository from '@modules/users/repositories/IUserRepository';
@@ -31,7 +30,7 @@ class ListProvidersService {
                 except_user_id: user_id,
             });
 
-            await this.cacheProvider.save(cacheKey, users);
+            await this.cacheProvider.save(cacheKey, classToClass(users));
         }
 
         if (!users) {
